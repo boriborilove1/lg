@@ -23,6 +23,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y chromium-chromedriver
           sudo apt-get install xclip
+          sudo apt-get install -y xvfb
           pip install selenium python-dotenv pyperclip
 
       - name: .env 파일 생성
@@ -35,6 +36,15 @@ jobs:
           echo "CARD_NAME=${{ secrets.CARD_NAME }}" >> .env
           echo "CARD_BIRTH=${{ secrets.CARD_BIRTH }}" >> .env
           echo "PAY_AMOUNT=${{ secrets.PAY_AMOUNT }}" >> .env
+
+      - name: 셀레니움 그래픽 환경 설정
+        run: |
+          # Xvfb를 백그라운드에서 실행
+          nohup Xvfb :99 -screen 0 1280x1024x24 &
+  
+          # 디스플레이 환경 변수 설정
+          export DISPLAY=:99
+
 
       - name: 자동 결제 스크립트 실행
         env:
