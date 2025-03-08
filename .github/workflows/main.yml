@@ -1,0 +1,37 @@
+name: Auto Pay Job
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 매일 00:00 (UTC) 실행 (한국 시간 09:00)
+
+  workflow_dispatch:  # 수동 실행 가능
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Python 설정
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: 의존성 설치
+        run: pip install selenium python-dotenv pyperclip
+
+      - name: .env 파일 생성
+        run: |
+          echo "ID=${{ secrets.ID }}" >> .env
+          echo "PW=${{ secrets.PW }}" >> .env
+          echo "KAKAO_ID=${{ secrets.KAKAO_ID }}" >> .env
+          echo "KAKAO_PW=${{ secrets.KAKAO_PW }}" >> .env
+          echo "CARD_NUM=${{ secrets.CARD_NUM }}" >> .env
+          echo "CARD_NAME=${{ secrets.CARD_NAME }}" >> .env
+          echo "CARD_BIRTH=${{ secrets.CARD_BIRTH }}" >> .env
+          echo "PAY_AMOUNT=${{ secrets.PAY_AMOUNT }}" >> .env
+
+      - name: 자동 결제 스크립트 실행
+        run: python lg_test_gpt.py
