@@ -29,7 +29,7 @@ options = Options()
 # GitHub Actions 환경이면 headless 모드 적용
 if os.getenv("GITHUB_ACTIONS"):
     options.binary_location = "/usr/bin/chromium-browser"
-    #options.add_argument("--headless")
+    options.add_argument("--headless")
 
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
@@ -42,7 +42,7 @@ url1 = 'https://www.lguplus.com/login'
 pay_url = 'https://www.lguplus.com/mypage/payinfo?p=1'
 
 XPATHS = {
-    "kakao_login_btn": '/html/body/div[1]/div/div/main/div[1]/div/div[2]/div/div/div/div/section/ul[1]/li[1]/button/img',
+    "kakao_login_btn": '//*[@id="_uid_176"]/img',
     "login_btn": '/html/body/div/div/div/main/article/div/div/form/div[4]/button[1]',
     "pay_btn": '/html/body/div[1]/div/div/main/div[1]/div/div[2]/div/div/div/div[2]/div[1]/div/div[3]/button[1]',
     "confirm_pay_btn1": '/html/body/div[8]/div[1]/div/div/footer/button[2]',
@@ -59,10 +59,7 @@ try:
     time.sleep(2)
 
     # 카카오 로그인 버튼 클릭
-    kakao_login_btn = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, XPATHS["kakao_login_btn"]))
-    )
-    #driver.find_element(By.XPATH, XPATHS["kakao_login_btn"]).click()
+    driver.find_element(By.XPATH, XPATHS["kakao_login_btn"]).click()
     time.sleep(2)
 
     # 카카오 로그인 정보 입력
