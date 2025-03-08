@@ -44,7 +44,7 @@ url1 = 'https://www.lguplus.com/login'
 pay_url = 'https://www.lguplus.com/mypage/payinfo?p=1'
 
 XPATHS = {
-    "kakao_login_btn": '/html/body/div[1]/div/div/main/div[1]/div/div[2]/div/div/div/div/section/ul[1]/li[1]/button/img',
+    "kakao_login_btn": '//img[@src='https://www.lguplus.com/static/pc-static/nmem/images/icon_kakao.png' and @alt='카카오']',
     "login_btn": '/html/body/div/div/div/main/article/div/div/form/div[4]/button[1]',
     "pay_btn": '/html/body/div[1]/div/div/main/div[1]/div/div[2]/div/div/div/div[2]/div[1]/div/div[3]/button[1]',
     "confirm_pay_btn1": '/html/body/div[8]/div[1]/div/div/footer/button[2]',
@@ -61,16 +61,10 @@ try:
     time.sleep(2)
 
     # 카카오 로그인 버튼 클릭
-    button = driver.find_element_by_xpath("//img[@src='https://www.lguplus.com/static/pc-static/nmem/images/icon_kakao.png' and @alt='카카오']")
-    button.click()
-    # driver.find_element(By.XPATH, XPATHS["kakao_login_btn"]).click()
-    # time.sleep(2)
-    #버튼 로딩될때까지 대기(10초)
-    # print("로그인 버튼 로딩될때까지 대기(5초)")
-    # kakao_login_btn = WebDriverWait(driver, 5).until(
-    #     EC.presence_of_element_located((By.XPATH, XPATHS["kakao_login_btn"]))
-    # )
-
+    time.sleep(2)
+    driver.find_element(By.XPATH, XPATHS["kakao_login_btn"]).click()
+    time.sleep(2)
+    
     # 카카오 로그인 정보 입력
     for field, value in [('#loginId--1', kakao_id), ('#password--2', kakao_pw)]:
         pyperclip.copy(value)
