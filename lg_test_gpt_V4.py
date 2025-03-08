@@ -61,13 +61,13 @@ try:
     time.sleep(2)
 
     # 카카오 로그인 버튼 클릭
-    # driver.find_element(By.CSS_SELECTOR, XPATHS["kakao_login_btn"]).click()
-    # time.sleep(2)
+    driver.find_element(By.XPATH, XPATHS["kakao_login_btn"]).click()
+    time.sleep(2)
     #버튼 로딩될때까지 대기(10초)
-    print("로그인 버튼 로딩될때까지 대기(5초)")
-    kakao_login_btn = WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.XPATH, XPATHS["kakao_login_btn"]))
-    )
+    # print("로그인 버튼 로딩될때까지 대기(5초)")
+    # kakao_login_btn = WebDriverWait(driver, 5).until(
+    #     EC.presence_of_element_located((By.XPATH, XPATHS["kakao_login_btn"]))
+    # )
 
     # 카카오 로그인 정보 입력
     for field, value in [('#loginId--1', kakao_id), ('#password--2', kakao_pw)]:
