@@ -62,7 +62,7 @@ try:
 
     # 카카오 로그인 버튼 클릭
     button = driver.find_element_by_xpath("//img[@src='https://www.lguplus.com/static/pc-static/nmem/images/icon_kakao.png' and @alt='카카오']")
-button.click()
+    button.click()
     # driver.find_element(By.XPATH, XPATHS["kakao_login_btn"]).click()
     # time.sleep(2)
     #버튼 로딩될때까지 대기(10초)
