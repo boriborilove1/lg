@@ -48,6 +48,7 @@ XPATHS = {
     "kakao_login_btn": "//img[@src='https://www.lguplus.com/static/pc-static/nmem/images/icon_kakao.png' and @alt='카카오']",
     "login_btn": '/html/body/div/div/div/main/article/div/div/form/div[4]/button[1]',
     "pay_btn": '/html/body/div[1]/div/div/main/div[1]/div/div[2]/div/div/div/div[2]/div[1]/div/div[3]/button[1]',
+    "pay_btn1": '#_uid_225',
     "confirm_pay_btn1": '/html/body/div[8]/div[1]/div/div/footer/button[2]',
     "confirm_pay_btn2": '/html/body/div[9]/div[1]/div/div/footer/button[2]',
     "confirm_pay_btn3": '/html/body/div[9]/div[1]/div/div/footer/div/button'
@@ -83,8 +84,8 @@ try:
     print(f"[✅] {pay_url}에 접속 완료")
     time.sleep(2)
 
-    # 요금 납부 버튼 클릭
-    driver.find_element(By.XPATH, XPATHS["pay_btn"]).click()
+    # 요금 바로납부 버튼 클릭
+    driver.find_element(By.CSS_SELECTOR, XPATHS["pay_btn1"]).click()
     print("[💰] 요금 납부 버튼 클릭")
     time.sleep(2)
 
