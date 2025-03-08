@@ -42,7 +42,7 @@ url1 = 'https://www.lguplus.com/login'
 pay_url = 'https://www.lguplus.com/mypage/payinfo?p=1'
 
 XPATHS = {
-    "kakao_login_btn": '//*[@id="_uid_176"]/img',
+    "kakao_login_btn": '#_uid_176 > img',
     "login_btn": '/html/body/div/div/div/main/article/div/div/form/div[4]/button[1]',
     "pay_btn": '/html/body/div[1]/div/div/main/div[1]/div/div[2]/div/div/div/div[2]/div[1]/div/div[3]/button[1]',
     "confirm_pay_btn1": '/html/body/div[8]/div[1]/div/div/footer/button[2]',
@@ -59,7 +59,7 @@ try:
     time.sleep(2)
 
     # 카카오 로그인 버튼 클릭
-    driver.find_element(By.XPATH, XPATHS["kakao_login_btn"]).click()
+    driver.find_element(By.CSS_SELECTOR, XPATHS["kakao_login_btn"]).click()
     time.sleep(2)
 
     # 카카오 로그인 정보 입력
