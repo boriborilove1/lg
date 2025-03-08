@@ -41,6 +41,7 @@ driver = webdriver.Chrome(options=options)
 
 # 유플러스 및 카카오 로그인 URL
 url1 = 'https://www.lguplus.com/login'
+login_url = 'https://accounts.kakao.com/login/?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fclient_id%3D146968a52610c6c7a2e768d9a2443314%26state%3DKKAOLoginni9k9ta13ql2d99ukjpfu66sr7%26redirect_uri%3Dhttps%253A%252F%252Fwww.lguplus.com%252Flogin%252Fsns-login%252Fcallback%26response_type%3Dcode%26auth_tran_id%3Df8du9exmphq146968a52610c6c7a2e768d9a2443314m7zzbjys%26ka%3Dsdk%252F1.41.0%2520os%252Fjavascript%2520sdk_type%252Fjavascript%2520lang%252Fko-KR%2520device%252FWin32%2520origin%252Fhttps%25253A%25252F%25252Fwww.lguplus.com%26is_popup%3Dfalse%26through_account%3Dtrue&talk_login=hidden#login'
 pay_url = 'https://www.lguplus.com/mypage/payinfo?p=1'
 
 XPATHS = {
@@ -56,14 +57,16 @@ XPATHS = {
 
 try:
     # 로그인 페이지 접속
-    driver.get(url1)
-    print(f"[✅] {url1}에 접속 완료")
+    # driver.get(url1)
+    # print(f"[✅] {url1}에 접속 완료")
+    driver.get(login_url)
+    print("[✅] 카카오 로그인 페이지에 접속 완료")
     time.sleep(2)
 
     # 카카오 로그인 버튼 클릭
-    time.sleep(2)
-    driver.find_element(By.XPATH, XPATHS["kakao_login_btn"]).click()
-    time.sleep(2)
+    # time.sleep(2)
+    # driver.find_element(By.XPATH, XPATHS["kakao_login_btn"]).click()
+    # time.sleep(2)
     
     # 카카오 로그인 정보 입력
     for field, value in [('#loginId--1', kakao_id), ('#password--2', kakao_pw)]:
