@@ -61,8 +61,10 @@ try:
     time.sleep(2)
 
     # 카카오 로그인 버튼 클릭
-    driver.find_element(By.XPATH, XPATHS["kakao_login_btn"]).click()
-    time.sleep(2)
+    button = driver.find_element_by_xpath("//img[@src='https://www.lguplus.com/static/pc-static/nmem/images/icon_kakao.png' and @alt='카카오']")
+button.click()
+    # driver.find_element(By.XPATH, XPATHS["kakao_login_btn"]).click()
+    # time.sleep(2)
     #버튼 로딩될때까지 대기(10초)
     # print("로그인 버튼 로딩될때까지 대기(5초)")
     # kakao_login_btn = WebDriverWait(driver, 5).until(
