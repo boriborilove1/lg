@@ -29,7 +29,7 @@ options = Options()
 # GitHub Actions 환경이면 headless 모드 적용
 if os.getenv("GITHUB_ACTIONS"):
     options.binary_location = "/usr/bin/chromium-browser"
-    options.add_argument("--headless")
+    #options.add_argument("--headless")
 
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
