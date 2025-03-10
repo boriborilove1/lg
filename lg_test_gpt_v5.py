@@ -74,7 +74,8 @@ try:
     print(f"[✅] 카카오 로그인 버튼을 클릭하기 위해 로딩될 때까지 10초 대기합니다.")
     # pay_button = WebDriverWait(driver, 10).until(
     #     EC.element_to_be_clickable((By.XPATH, XPATHS["kakao_login_btn"]))) #버튼이 보일 때까지 10초 대기
-    driver.find_element(By.XPATH, XPATHS["kakao_login_btn"]).click()
+    kakao_login_btn = driver.find_element(By.XPATH, XPATHS["kakao_login_btn"])
+    driver.execute_script("arguments[0].click();", kakao_login_btn)
     print(f"[✅] 카카오 로그인 버튼 클릭완료")
     time.sleep(2)
     # driver.find_element(By.XPATH, XPATHS["kakao_login_btn"]).click()
