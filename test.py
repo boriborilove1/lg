@@ -81,10 +81,11 @@ url1 = 'https://www.lguplus.com/login/fallback'
 driver.get(url1)
 print(f"[✅] {driver.current_url}에 접속 완료")
 
-# button = driver.find_element(By.XPATH, XPATHS["kakao_login_btn"])
-# print(button.is_enabled())  # 클릭 가능한지 확인
-# print(button.is_displayed())  # 화면에 표시되는지 확인
-# driver.save_screenshot('C:/screenshot.png')
+time.sleep(10)
+button = driver.find_element(By.XPATH, XPATHS["kakao_login_btn"])
+print(button.is_enabled())  # 클릭 가능한지 확인
+print(button.is_displayed())  # 화면에 표시되는지 확인
+driver.save_screenshot('C:/screenshot.png')
 time.sleep(5)
 
 # 1️⃣ 버튼이 나타날 때까지 기다리기
