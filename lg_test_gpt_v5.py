@@ -84,7 +84,8 @@ try:
     pyperclip.copy(kakao_id)
     print(f"[✅] 카카오 로그인 아이디 복사완료 from .env")
     kakao_id_filed = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, XPATHS["kakao_id_input"]))) #id 입력필드 보일때까지 10초간 대기
+        EC.presence_of_element_located((By.XPATH, XPATHS["kakao_id_input"]))) #id 입력필드 보일때까지 10초간 대기
+    print(f"[✅] 카카오 로그인 아이디 입력필드 확인")
     kakao_id_filed.send_keys(Keys.CONTROL, 'v')
     print(f"[✅] 카카오 로그인 아이디 입력완료")
     
