@@ -73,23 +73,33 @@ try:
     print(f"[✅] 카카오 로그인 버튼을 클릭하기 위해 로딩될 때까지 10초 대기합니다.")
     pay_button = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.XPATH, XPATHS["kakao_login_btn"]))) #버튼이 보일 때까지 10초 대기
+    pay_button.click()
     print(f"[✅] 카카오 로그인 버튼 클릭완료")
-    
+
     # time.sleep(2)
-    # driver.find_element(By.XPATH, XPATHS["klaskdaskdfao_login_btn"]).click()
+    # driver.find_element(By.XPATH, XPATHS["kakao_login_btn"]).click()
     # time.sleep(2)
     
     # 카카오 로그인 정보 입력
+
+    # pyperclip.copy(kakao_id)
+    # driver.find_element(By.XPATH, XPATHS["kakao_id_input"]).send_keys(Keys.CONTROL, 'v')
+
+    # pyperclip.copy(kakao_pw)
+    # driver.find_element(By.XPATH, XPATHS["kakao_pw_input"]).send_keys(Keys.CONTROL, 'v')
+
     for field, value in [(XPATHS["kakao_id_input"], kakao_id), (XPATHS["kakao_pw_input"], kakao_pw)]:
         pyperclip.copy(value)
         texts = f"{value}"
         print("[✅] {texts} 복사완료")
         driver.find_element(By.XPATH, field).send_keys(Keys.CONTROL, 'v')
+        
     print(f"[✅] 아이디, 비밀번호 입력완료")
 
     driver.find_element(By.XPATH, XPATHS["login_btn"]).click()
     print(f"[✅] 카카오 정보로 로그인 완료")
     time.sleep(3)
+
 
     # 결제 페이지 이동
     driver.get(pay_url)
