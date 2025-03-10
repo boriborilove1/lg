@@ -19,7 +19,7 @@ jobs:
           python-version: '3.9'
 
       - name: 캐시된 패키지 복원
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pip  # pip 캐시 경로
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}  # requirements.txt 파일의 해시값을 키로 사용
