@@ -29,20 +29,6 @@ expiration_year = os.getenv("EXPIRATION_YEAR")
 expiration_month = os.getenv("EXPIRATION_MONTH")
 pay_amount = os.getenv("PAY_AMOUNT")
 
-# Selenium WebDriver 설정
-options = Options()
-
-# GitHub Actions 환경이면 Chromium 브라우저 경로 설정
-if os.getenv("GITHUB_ACTIONS"):
-    options.binary_location = "/usr/bin/chromium-browser"  # ✅ 브라우저 실행 파일 경로 지정
-    service = Service("/usr/bin/chromedriver")  # ✅ 크롬 드라이버 실행 파일 경로 지정
-    options.headless = True
-else:
-    options.binary_location = "/usr/bin/google-chrome"
-    service = Service("/usr/bin/chromedriver")
-    options.headless = False  # 로컬 테스트 시 GUI 실행
-
-driver = webdriver.Chrome(service=service, options=options)
 
 # # GitHub Actions 환경이면 headless 모드 적용
 # if os.getenv("GITHUB_ACTIONS"):
@@ -51,13 +37,28 @@ driver = webdriver.Chrome(service=service, options=options)
 # else:
 #     options.headless = False  # 로컬 테스트 시 GUI 실행
 
-options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36")
+# Selenium WebDriver 설정
+options = Options()
+options.add_argument("--headless")  # 헤드리스 모드 활성화
+options.add_argument("--ignore-certificate-errors")  # SSL 인증서 오류 무시
+options.add_argument("--allow-running-insecure-content")  # 안전하지 않은 콘텐츠 허용
 options.add_argument("--no-sandbox")
+options.add_argument('--disable-gpu')  # Disable GPU
+options.add_argument('--use-gl=desktop')  # Use desktop OpenGL
 options.add_argument("--disable-dev-shm-usage")
+options.add_argument("--window-size=1920,1080")  # 창 크기 조정
+options.add_argument("--disable-blink-features=AutomationControlled")  # 봇 탐지 우회
+options.add_argument("--enable-unsafe-swiftshader")
+# options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36")
+# options.add_argument("--no-sandbox")
+# options.add_argument("--disable-dev-shm-usage")
 
 # 크롬 드라이버 실행
-driver = webdriver.Chrome(options=options)
-driver.implicitly_wait(5)  # 페이지 로드 대기 시간 설정
+options.binary_location = "/usr/bin/chromium-browser"  # ✅ 브라우저 실행 파일 경로 지정
+service = Service("/usr/bin/chromedriver")  # ✅ 크롬 드라이버 실행 파일 경로 지정
+
+driver = webdriver.Chrome(service=service, options=options)
+# driver.implicitly_wait(5)  # 페이지 로드 대기 시간 설정
 
 # 유플러스 및 카카오 로그인 URL
 url1 = 'https://www.lguplus.com/login/fallback'
