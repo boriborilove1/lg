@@ -65,18 +65,7 @@ url1 = 'https://www.lguplus.com/login/fallback'
 login_url = 'https://accounts.kakao.com/login/?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fclient_id%3D146968a52610c6c7a2e768d9a2443314%26state%3DKKAOLoginni9k9ta13ql2d99ukjpfu66sr7%26redirect_uri%3Dhttps%253A%252F%252Fwww.lguplus.com%252Flogin%252Fsns-login%252Fcallback%26response_type%3Dcode%26auth_tran_id%3Df8du9exmphq146968a52610c6c7a2e768d9a2443314m7zzbjys%26ka%3Dsdk%252F1.41.0%2520os%252Fjavascript%2520sdk_type%252Fjavascript%2520lang%252Fko-KR%2520device%252FWin32%2520origin%252Fhttps%25253A%25252F%25252Fwww.lguplus.com%26is_popup%3Dfalse%26through_account%3Dtrue&talk_login=hidden#login'
 pay_url = 'https://www.lguplus.com/mypage/payinfo?p=1'
 
-XPATHS = {
-    "kakao_login_btn": '//*[@id="_uid_176"]/img',
-    "kakao_id_input" : '/html/body/div/div/div/main/article/div/div/form/div[1]/div/input',
-    "kakao_pw_input" : '/html/body/div/div/div/main/article/div/div/form/div[2]/div/input',
-    "login_btn": '/html/body/div/div/div/main/article/div/div/form/div[4]/button[1]',
-    "pay_btn": '/html/body/div[1]/div/div/main/div[1]/div/div[2]/div/div/div/div[2]/div[1]/div/div[3]/button[1]',
-    "pay_btn1": '#_uid_225',
-    "confirm_pay_btn1": '/html/body/div[8]/div[1]/div/div/footer/button[2]',
-    "confirm_pay_btn2": '/html/body/div[9]/div[1]/div/div/footer/button[2]',
-    "confirm_pay_btn3": '/html/body/div[9]/div[1]/div/div/footer/div/button'
-}
-
+# 페이지 내 요소별 XPATH 경로
 XPATHS = {
     "kakao_login_btn": '/html/body/div[1]/div/div/main/div[1]/div/div[2]/div/div/div/div/section/ul[1]/li[1]/button/img',
     "kakao_id_input" : '/html/body/div/div/div/main/article/div/div/form/div[1]/div/input',
@@ -96,12 +85,13 @@ button = driver.find_element(By.XPATH, XPATHS["kakao_login_btn"])
 print(button.is_enabled())  # 클릭 가능한지 확인
 print(button.is_displayed())  # 화면에 표시되는지 확인
 # driver.save_screenshot('C:/screenshot.png')
+time.sleep(5)
 
 # 1️⃣ 버튼이 나타날 때까지 기다리기
-# wait = WebDriverWait(driver, 60)
+wait = WebDriverWait(driver, 60)
+button = wait.until(EC.visibility_of_element_located((By.XPATH, XPATHS["kakao_login_btn"])))
 # button = wait.until(EC.visibility_of_element_located((By.XPATH, XPATHS["kakao_login_btn"])))
-# button = wait.until(EC.visibility_of_element_located((By.XPATH, XPATHS["kakao_login_btn"])))
-button = driver.find_element(By.XPATH, XPATHS["kakao_login_btn"])
+#button = driver.find_element(By.XPATH, XPATHS["kakao_login_btn"])
 button.click()
 
 # 페이지 URL이 변경될 때까지 기다리기
