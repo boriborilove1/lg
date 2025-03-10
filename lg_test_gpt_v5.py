@@ -81,18 +81,24 @@ try:
     # time.sleep(2)
     
     # 카카오 로그인 정보 입력
-
-    # pyperclip.copy(kakao_id)
+    pyperclip.copy(kakao_id)
+    print(f"[✅] 카카오 로그인 아이디 복사완료 from .env")
+    kakao_id_filed = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, XPATHS["kakao_id_input"]))) #id 입력필드 보일때까지 10초간 대기
+    kakao_id_filed.send_keys(Keys.CONTROL, 'v')
+    print(f"[✅] 카카오 로그인 아이디 입력완료")
+    
+    # pyperclip.copy(kakao_id)    
     # driver.find_element(By.XPATH, XPATHS["kakao_id_input"]).send_keys(Keys.CONTROL, 'v')
 
     # pyperclip.copy(kakao_pw)
     # driver.find_element(By.XPATH, XPATHS["kakao_pw_input"]).send_keys(Keys.CONTROL, 'v')
 
-    for field, value in [(XPATHS["kakao_id_input"], kakao_id), (XPATHS["kakao_pw_input"], kakao_pw)]:
-        pyperclip.copy(value)
-        texts = f"{value}"
-        print("[✅] {texts} 복사완료")
-        driver.find_element(By.XPATH, field).send_keys(Keys.CONTROL, 'v')
+    # for field, value in [(XPATHS["kakao_id_input"], kakao_id), (XPATHS["kakao_pw_input"], kakao_pw)]:
+    #     pyperclip.copy(value)
+    #     texts = f"{value}"
+    #     print("[✅] {texts} 복사완료")
+    #     driver.find_element(By.XPATH, field).send_keys(Keys.CONTROL, 'v')
         
     print(f"[✅] 아이디, 비밀번호 입력완료")
 
