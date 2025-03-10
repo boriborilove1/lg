@@ -49,4 +49,4 @@ jobs:
       - name: 자동 결제 스크립트 실행
         env:
           DISPLAY: ':99'
-        run: python lg_test_gpt_v5.py
+        run: python test.py
