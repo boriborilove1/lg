@@ -31,12 +31,17 @@ pay_amount = os.getenv("PAY_AMOUNT")
 # Selenium WebDriver 설정
 options = Options()
 
-# GitHub Actions 환경이면 headless 모드 적용
+# GitHub Actions 환경이면 Chromium 브라우저 경로 설정
 if os.getenv("GITHUB_ACTIONS"):
-    options.binary_location = "/usr/bin/chromium-browser"
+    options.binary_location = "/usr/bin/chromium-browser"  # ✅ 브라우저 실행 파일 경로 지정
+    service = Service("/usr/bin/chromedriver")  # ✅ 크롬 드라이버 실행 파일 경로 지정
     options.headless = True
 else:
+    options.binary_location = "/usr/bin/google-chrome"
+    service = Service("/usr/bin/chromedriver")
     options.headless = False  # 로컬 테스트 시 GUI 실행
+
+driver = webdriver.Chrome(service=service, options=options)
 
 options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36")
 options.add_argument("--no-sandbox")
