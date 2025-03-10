@@ -33,8 +33,7 @@ options = Options()
 
 # GitHub Actions 환경이면 headless 모드 적용
 if os.getenv("GITHUB_ACTIONS"):
-    #options.binary_location = "/usr/bin/chromium-browser"
-    options.binary_location = "/usr/local/bin/chromedriver"
+    options.binary_location = "/usr/bin/chromium-browser"
     options.headless = True
 else:
     options.headless = False  # 로컬 테스트 시 GUI 실행
