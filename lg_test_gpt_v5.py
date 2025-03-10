@@ -13,6 +13,9 @@ import os
 # .env 파일 로드
 load_dotenv()
 
+# github action에서 그래픽 환경 사용을 위한 환경변수 설정
+os.environ["DISPLAY"] = ":99"
+
 # 환경 변수 가져오기
 id = os.getenv("ID")
 pw = os.getenv("PW")
@@ -31,10 +34,11 @@ options = Options()
 # GitHub Actions 환경이면 headless 모드 적용
 if os.getenv("GITHUB_ACTIONS"):
     options.binary_location = "/usr/bin/chromium-browser"
-    options.add_argument("--headless")
+    options.headless = True
 else:
     options.headless = False  # 로컬 테스트 시 GUI 실행
 
+options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 
@@ -56,8 +60,6 @@ XPATHS = {
     "confirm_pay_btn2": '/html/body/div[9]/div[1]/div/div/footer/button[2]',
     "confirm_pay_btn3": '/html/body/div[9]/div[1]/div/div/footer/div/button'
 }
-
-
 
 try:
     # 로그인 페이지 접속
