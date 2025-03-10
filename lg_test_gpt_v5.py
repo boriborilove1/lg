@@ -64,7 +64,8 @@ XPATHS = {
 try:
     # 로그인 페이지 접속
     driver.get(url1)
-    print(f"[✅] {url1}에 접속 완료")
+    current_url = driver.current_url
+    print(f"[✅] {current_url}에 접속 완료")
     # driver.get(login_url)
     # print("[✅] 카카오 로그인 페이지에 접속 완료")
 
@@ -77,10 +78,10 @@ try:
     print(f"[✅] 카카오 로그인 버튼 클릭완료")
     time.sleep(2)
     # driver.find_element(By.XPATH, XPATHS["kakao_login_btn"]).click()
-    current = driver.current_url #현재 접속한 페이지 정보담기
-    print(f"[✅] 현재 {current} 페이지에 접속하였습니다.")    
+    current_url1 = driver.current_url
+    print(f"[✅] 현재 {current_url1} 페이지에 접속하였습니다.")    
     time.sleep(2)
-
+    
     # 카카오 로그인 정보 입력
     pyperclip.copy(kakao_id)
     print(f"[✅] 카카오 로그인 아이디 복사완료 from .env")
