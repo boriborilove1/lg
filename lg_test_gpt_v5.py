@@ -80,8 +80,10 @@ try:
     # time.sleep(2)
     
     # 카카오 로그인 정보 입력
-    for field, value in [('#loginId--1', kakao_id), ('#password--2', kakao_pw)]:
+    for field, value in [(XPATHS["kakao_id_input"], kakao_id), (XPATHS["kakao_pw_input"], kakao_pw)]:
         pyperclip.copy(value)
+        texts = f"{value}"
+        print("[✅] {texts} 복사완료")
         driver.find_element(By.CSS_SELECTOR, field).send_keys(Keys.CONTROL, 'v')
     print(f"[✅] 아이디, 비밀번호 입력완료")
 
