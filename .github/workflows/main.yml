@@ -21,7 +21,7 @@ jobs:
       - name: 의존성 설치
         run: |
           sudo apt-get update
-          sudo apt-get install -y chromium-chromedriver
+          # sudo apt-get install -y chromium-chromedriver
           sudo apt-get install xclip
           sudo apt-get install -y xvfb
           pip install selenium python-dotenv pyperclip
@@ -36,6 +36,27 @@ jobs:
           echo "CARD_NAME=${{ secrets.CARD_NAME }}" >> .env
           echo "CARD_BIRTH=${{ secrets.CARD_BIRTH }}" >> .env
           echo "PAY_AMOUNT=${{ secrets.PAY_AMOUNT }}" >> .env
+
+      - name: 크롬 설치
+        run: |
+          set -ex
+          sudo apt-get update -y
+          wget <https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb>
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb          
+          sudo apt-get install -y -f 
+
+      - name: 크롬 드라이버 셋팅
+        run: |
+          wget <https://storage.googleapis.com/chrome-for-testing-public/129.0.6668.58/linux64/chromedriver-linux64.zip>
+          unzip chromedriver-linux64.zip
+          sudo mv ./chromedriver-linux64/chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+
+      - name: Setup Xvfb
+        run: |
+          sudo apt-get install -y xvfb
+          Xvfb :99 -screen 0 1024x768x24 &
+          export DISPLAY=:99
 
       - name: 셀레니움 그래픽 환경 설정
         run: |
