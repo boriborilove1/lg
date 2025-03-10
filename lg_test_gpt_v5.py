@@ -84,7 +84,7 @@ try:
         pyperclip.copy(value)
         texts = f"{value}"
         print("[✅] {texts} 복사완료")
-        driver.find_element(By.CSS_SELECTOR, field).send_keys(Keys.CONTROL, 'v')
+        driver.find_element(By.XPATH, field).send_keys(Keys.CONTROL, 'v')
     print(f"[✅] 아이디, 비밀번호 입력완료")
 
     driver.find_element(By.XPATH, XPATHS["login_btn"]).click()
