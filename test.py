@@ -29,8 +29,8 @@ driver.get(url1)
 print(f"[✅] {driver.current_url}에 접속 완료")
 
 # 요소가 나타날 때까지 명시적 대기 사용
-wait = WebDriverWait(driver, 30)
-button = wait.until(EC.element_to_be_clickable((By.XPATH, XPATHS["kakao_login_btn"])))
+time.sleep(10)
+button = driver.find_element(By.XPATH, "//button[img[@alt='카카오']]")
 
 print("버튼 클릭 전:", button.is_displayed(), button.is_enabled())
 button.click()
