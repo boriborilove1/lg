@@ -15,7 +15,7 @@ options.add_argument("--window-size=1920,1080")
 options.add_argument("--disable-blink-features=AutomationControlled")
 
 # Linux 환경에서 chromedriver가 /usr/local/bin/chromedriver에 설치되었다고 가정
-service = Service("/usr/local/bin/chromedriver")
+service = Service("/usr/bin/chromedriver")
 
 driver = webdriver.Chrome(service=service, options=options)
 driver.implicitly_wait(5)
