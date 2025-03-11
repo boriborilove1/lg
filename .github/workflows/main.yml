@@ -18,22 +18,19 @@ jobs:
         with:
           python-version: '3.9'
 
-      # ✅ pip 캐싱을 활용하여 설치 속도 향상
       - name: 캐시된 pip 패키지 사용
         uses: actions/cache@v4
         with:
-          path: ~/.cache/pip  # pip 패키지 캐싱 경로
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}  # requirements.txt 변경 시 캐시 갱신
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
       - name: 의존성 설치
         run: |
           sudo apt-get update
-          sudo apt-get install -y chromium-chromedriver
-          sudo apt-get install xclip
-          sudo apt-get install -y xvfb
-          pip install -r requirements.txt  # requirements.txt를 사용해 패키지 설치
+          sudo apt-get install -y chromium-browser chromium-chromedriver xvfb xclip
+          pip install -r requirements.txt
 
       - name: .env 파일 생성
         run: |
@@ -46,16 +43,5 @@ jobs:
           echo "CARD_BIRTH=${{ secrets.CARD_BIRTH }}" >> .env
           echo "PAY_AMOUNT=${{ secrets.PAY_AMOUNT }}" >> .env
 
-      - name: 셀레니움 그래픽 환경 설정
-        run: |
-          # Xvfb를 백그라운드에서 실행
-          nohup Xvfb :99 -screen 0 1280x1024x24 &
-  
-          # 디스플레이 환경 변수 설정
-          export DISPLAY=:99
-
-
       - name: 자동 결제 스크립트 실행
-        env:
-          DISPLAY: ':99'
-        run: python test.py
+        run: xvfb-run python test.py
